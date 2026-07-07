@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register Student</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/256/1141/1141822.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 40px;
+      background-image: url("blood-moon-mountains-scenery-4k-wallpaper-uhdpaper.com-225@0@k.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    h1 {
+      text-align: center;
+      color: #fff;
+      text-shadow: 2px 2px 5px black;
+    }
+    form {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 50px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: 30px auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      animation: slideUp 1s ease-out;
+    }
+    @keyframes slideUp {
+      from {
+        transform: translateY(20%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    label {
+      margin-top: 10px;
+      display: block;
+      font-weight: bold;
+      color: #00ff66;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    select{
+      width: 105%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      width: 48%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+    button:last-child {
+      background-color: #007bff;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    #btn1 {
+      animation-name: b1;
+      animation-duration: 0.5s;
+      animation-delay: 0.1s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-out;
+      animation-iteration-count: 1;
+    }
+    @keyframes b1 {
+      from {
+        transform: translateX(-250%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+    #btn2 {
+      animation-name: b2;
+      animation-duration: 0.5s;
+      animation-delay: 0.1s;
+      animation-fill-mode: forwards;
+      animation-timing-function: ease-out;
+      animation-iteration-count: 1;
+      position: relative;
+      left: 30px;
+    }
+    @keyframes b2 {
+      from {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Register New Student</h1>
+  <form id="studentForm">
+    <label>Name:</label>
+    <input type="text" id="name" required />
+
+    <label>Roll Number:</label>
+    <input type="text" id="rollNumber" required />
+
+    <label>Department:</label>
+    <select id="department" required>
+      <option value="">Select</option>
+      <option value="CSE">CSE</option>
+      <option value="IT">IT</option>
+      <option value="MECH">MECH</option>
+      <option value="CIVIL">CIVIL</option>
+    </select>
+
+    <label>Gender:</label>
+    <select id="gender" required>
+      <option value="">Select</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label>Course ID:</label>
+    <input type="number" id="CourseID" required />
+    <div>
+      <button type="submit" id="btn1">Submit</button>
+      <button type="button" id="btn2" onclick="window.location.href='index.html'">Back</button>
+    </div>
+  </form>
+  <script>
+    document.getElementById("studentForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const roll = document.getElementById("rollNumber").value;
+      const dept = document.getElementById("department").value;
+      const gender = document.getElementById("gender").value;
+      const courseId = document.getElementById("CourseID").value;
+
+      const url = `http://localhost:8080/new/student?rollnumber=${roll}&name=${name}&dept=${dept}&gender=${gender}&course_id=${courseId}`;
+
+      try {
+        const res = await fetch(url, { method: "POST" });
+        const msg = await res.text();
+        alert(msg);
+        document.getElementById("studentForm").reset();
+      } catch (err) {
+        alert("Error: " + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

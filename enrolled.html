@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Enrolled Students</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/256/1141/1141822.png">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eaf2f8;
+      padding: 40px;
+      background-image: url("blood-moon-mountains-scenery-4k-wallpaper-uhdpaper.com-225@0@k.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #fff;
+      text-shadow: 1px 1px 4px black;
+    }
+
+    table {
+      width: 95%;
+      margin: auto;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1s ease-out;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+
+    td {
+      color: #333;
+    }
+
+    button {
+      position: relative;
+      left: 88%;
+      top: 30px;
+      padding: 10px 25px;
+      font-size: 15px;
+      font-weight: bold;
+      color: white;
+      background-color: rgb(25, 58, 251);
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: rgb(100, 100, 253);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      table {
+        width: 100%;
+      }
+
+      button {
+        left: 0;
+        display: block;
+        margin: 20px auto 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Enrolled Students</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Roll Number</th>
+        <th>Department</th>
+        <th>Gender</th>
+        <th>Course ID</th>
+        <th>Course Name</th>
+        <th>Duration</th>
+        <th>Cost</th>
+      </tr>
+    </thead>
+    <tbody id="studentTable"></tbody>
+  </table>
+
+  <button type="button" onclick="location.href='index.html'">Back</button>
+
+  <script>
+    window.onload = function () {
+      fetch("http://localhost:8080/students")
+        .then(response => {
+          if (!response.ok) throw new Error("Failed to fetch students");
+          return response.json();
+        })
+        .then(students => {
+          const Table = document.getElementById("studentTable");
+          students.forEach(student => {
+            const row = `
+              <tr>
+                <td>${student.name}</td>
+                <td>${student.rollnumber}</td>
+                <td>${student.dept}</td>
+                <td>${student.gender}</td>
+                <td>${student.course_id}</td>
+                <td>${student.course_name}</td>
+                <td>${student.duration}</td>
+                <td>${student.course_cost}</td>
+              </tr>`;
+            Table.innerHTML += row;
+          });
+        })
+        .catch(error => {
+          alert("Error loading student data.");
+          console.error("Fetch error:", error);
+        });
+    };
+  </script>
+</body>
+</html>
