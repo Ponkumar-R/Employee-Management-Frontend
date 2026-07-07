@@ -164,7 +164,7 @@
       const gender = document.getElementById("gender").value;
       const courseId = document.getElementById("CourseID").value;
 
-      const url = `http://localhost:8080/new/student?rollnumber=${roll}&name=${name}&dept=${dept}&gender=${gender}&course_id=${courseId}`;
+const url = `https://employee-management-system-y2dc.onrender.com/new/student?rollnumber=${roll}&name=${name}&dept=${dept}&gender=${gender}&course_id=${courseId}`;
 
       try {
         const res = await fetch(url, { method: "POST" });

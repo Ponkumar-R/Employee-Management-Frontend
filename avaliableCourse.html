@@ -99,7 +99,7 @@
 
   <script>
     window.onload = function () {
-      fetch("http://localhost:8080/courseDetails")
+      fetch("https://employee-management-system-y2dc.onrender.com/courseDetails")
         .then(response => response.json())
         .then(courses => {
           const Table = document.getElementById("CourseTable");

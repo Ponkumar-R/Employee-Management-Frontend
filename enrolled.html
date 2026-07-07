@@ -114,7 +114,7 @@
 
   <script>
     window.onload = function () {
-      fetch("http://localhost:8080/students")
+      fetch("https://employee-management-system-y2dc.onrender.com/students")
         .then(response => {
           if (!response.ok) throw new Error("Failed to fetch students");
           return response.json();
